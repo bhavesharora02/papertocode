@@ -1,0 +1,61 @@
+{
+  "family": "Transformer",
+  "variant": "BERT",
+  "layers": [
+    {
+      "type": "pretrained_backbone",
+      "params": {
+        "name": "bert-base-uncased"
+      }
+    },
+    {
+      "type": "pooling",
+      "params": {
+        "strategy": "cls_token"
+      }
+    },
+    {
+      "type": "linear",
+      "params": {
+        "out_features": "num_classes"
+      }
+    }
+  ],
+  "training": {
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "scheduler": {
+      "name": "LinearWarmup",
+      "kwargs": {
+        "warmup_ratio": 0.1
+      }
+    },
+    "batch_size": 32,
+    "epochs": 3,
+    "metrics": [
+      "accuracy",
+      "f1"
+    ],
+    "target_metrics": {
+      "accuracy": 0.9
+    }
+  },
+  "preprocessing": {
+    "tokenizer": "bert-base-uncased",
+    "max_len": 512,
+    "input_format": "[CLS] <text> [SEP]"
+  },
+  "dataset_hints": {
+    "name": "GLUE",
+    "features": {
+      "input": [
+        "sentence"
+      ],
+      "target": "label"
+    }
+  }
+}

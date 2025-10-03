@@ -1,0 +1,15 @@
+{
+  "family": "Transformer",
+  "variant": "BERT",
+  "layers": [],
+  "training": {
+    "loss": null,
+    "optimizer": {},
+    "scheduler": {},
+    "batch_size": null,
+    "epochs": null,
+    "metrics": []
+  },
+  "preprocessing": {},
+  "dataset_hints": {}
+}

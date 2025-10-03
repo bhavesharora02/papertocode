@@ -1,0 +1,72 @@
+{
+  "family": "Transformer",
+  "variant": "BertForSequenceClassification",
+  "layers": [
+    {
+      "type": "PretrainedBertModel",
+      "params": {
+        "name": "bert-base-uncased",
+        "description": "The core BERT model, pre-trained with Masked Language Model (MLM) and Next Sentence Prediction (NSP) objectives. All parameters are fine-tuned for the downstream task."
+      }
+    },
+    {
+      "type": "Dropout",
+      "params": {
+        "p": 0.1,
+        "description": "Standard dropout on the pooled output of the [CLS] token."
+      }
+    },
+    {
+      "type": "Linear",
+      "params": {
+        "in_features": 768,
+        "out_features": "num_labels",
+        "description": "A single linear layer for classification, added on top of the pre-trained BERT model. It takes the final hidden state of the [CLS] token as input."
+      }
+    }
+  ],
+  "training": {
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "scheduler": {
+      "name": "linear_schedule_with_warmup",
+      "kwargs": {
+        "num_warmup_steps": 0,
+        "num_training_steps": "total_steps"
+      }
+    },
+    "batch_size": 32,
+    "epochs": 3,
+    "metrics": [
+      "accuracy"
+    ],
+    "target_metrics": {
+      "description": "Achieved state-of-the-art results on many GLUE benchmark tasks."
+    }
+  },
+  "preprocessing": {
+    "tokenizer": "BertTokenizer",
+    "pretrained_model_name_or_path": "bert-base-uncased",
+    "max_length": 512,
+    "padding": "max_length",
+    "truncation": true,
+    "input_format": {
+      "description": "Input examples are prefixed with a special [CLS] token. For sentence-pair tasks, the two sentences are separated by a special [SEP] token.",
+      "template_single_sentence": "[CLS] <sentence> [SEP]",
+      "template_sentence_pair": "[CLS] <sentence_A> [SEP] <sentence_B> [SEP]"
+    }
+  },
+  "dataset_hints": {
+    "name": "GLUE",
+    "subset": "MNLI",
+    "features": {
+      "text_a": "Sentence A",
+      "text_b": "Sentence B",
+      "label": "label"
+    }
+  }
+}

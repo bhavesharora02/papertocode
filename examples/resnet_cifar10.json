@@ -1,0 +1,44 @@
+{
+    "paper": {
+      "title": "Deep Residual Learning for Image Recognition",
+      "arxiv_id": "1512.03385",
+      "tasks": ["image_classification"],
+      "domain": "CV"
+    },
+    "dataset": {
+      "name": "CIFAR-10",
+      "source": "torchvision/cifar10",
+      "subset_fraction": 0.1,
+      "splits": {"train": 0.8, "val": 0.1, "test": 0.1},
+      "features": {"image": "image", "label": "label"}
+    },
+    "model": {
+      "family": "CNN",
+      "variant": "ResNet-18",
+      "framework": "torch",
+      "layers": [
+        {"type": "ConvLayer", "filters": 64, "kernel": 7, "stride": 2},
+        {"type": "ResidualBlock", "num_blocks": 4},
+        {"type": "ClassifierHead", "num_classes": 10}
+      ],
+      "init": {"pretrained": false}
+    },
+    "training": {
+      "loss": "CrossEntropyLoss",
+      "optimizer": {"name": "SGD", "lr": 0.1, "weight_decay": 1e-4},
+      "scheduler": {"name": "cosine", "kwargs": {"T_max": 200}},
+      "batch_size": 128,
+      "epochs": 5,
+      "metrics": ["accuracy"],
+      "target_metrics": {"accuracy": 0.93},
+      "tolerance": 0.02
+    },
+    "preprocessing": {"resize": 224, "augmentations": ["RandomCrop", "Flip"]},
+    "mapping": {
+      "nn_modules": {
+        "CrossEntropyLoss": "torch.nn.CrossEntropyLoss",
+        "ResNet18": "torchvision.models.resnet18"
+      }
+    }
+  }
+  

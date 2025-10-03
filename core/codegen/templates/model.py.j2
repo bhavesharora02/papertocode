@@ -1,0 +1,40 @@
+import torch
+import torch.nn as nn
+from transformers import BertForSequenceClassification
+
+class Model(nn.Module):
+    def __init__(self):
+        super().__init__()
+        {% for layer in layers %}
+        {% if layer.type == "pretrained_transformer_encoder" %}
+        self.encoder = BertForSequenceClassification.from_pretrained(
+            "{{ layer.params.model_name }}",
+            num_labels={{ num_labels }}
+        )
+        {% elif layer.type == "Sequential" and layer.params._modules is defined %}
+        self.seq{{ loop.index }} = nn.Sequential(
+            {% for m in layer.params._modules %}
+            {{ m }},
+            {% endfor %}
+        )
+        {% else %}
+        self.{{ layer.type|lower }}{{ loop.index }} = nn.{{ layer.type }}(**{{ layer.params | py }})
+        {% endif %}
+        {% endfor %}
+
+    def forward(self, input_ids=None, attention_mask=None, labels=None, x=None):
+        {% if layers and layers[0].type == "pretrained_transformer_encoder" %}
+        return self.encoder(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+        {% else %}
+        if x is None:
+            x = input_ids
+        out = x
+        {% for layer in layers %}
+        {% if layer.type == "Sequential" and layer.params._modules is defined %}
+        out = self.seq{{ loop.index }}(out)
+        {% else %}
+        out = self.{{ layer.type|lower }}{{ loop.index }}(out)
+        {% endif %}
+        {% endfor %}
+        return out
+        {% endif %}

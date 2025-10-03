@@ -1,0 +1,97 @@
+{
+  "paper": {
+    "title": "Unknown Title",
+    "arxiv_id": null,
+    "tasks": [
+      "text_classification"
+    ],
+    "domain": "NLP"
+  },
+  "dataset": {
+    "name": "mnli",
+    "source": "hf://glue/mnli",
+    "subset_fraction": 1.0,
+    "splits": {
+      "train": 0.8,
+      "val": 0.1,
+      "test": 0.1
+    },
+    "features": {
+      "text_a": "premise",
+      "text_b": "hypothesis",
+      "label": "label"
+    }
+  },
+  "model": {
+    "family": "Transformer",
+    "variant": "bert-base-uncased",
+    "framework": "torch",
+    "layers": [
+      {
+        "type": "pretrained_transformer_encoder",
+        "params": {
+          "params": {
+            "model_name": "bert-base-uncased",
+            "output_pooler": true
+          }
+        }
+      },
+      {
+        "type": "linear",
+        "params": {
+          "params": {
+            "in_features": 768,
+            "out_features": "num_classes"
+          }
+        }
+      },
+      {
+        "type": "softmax",
+        "params": {
+          "params": {}
+        }
+      }
+    ],
+    "init": {
+      "pretrained": "bert-base-uncased"
+    }
+  },
+  "training": {
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 0.00002,
+      "weight_decay": 0.01
+    },
+    "scheduler": {
+      "name": "linear",
+      "kwargs": {
+        "warmup_ratio": 0.1
+      }
+    },
+    "batch_size": 32,
+    "epochs": 3,
+    "metrics": [
+      "accuracy",
+      "f1"
+    ],
+    "target_metrics": {},
+    "tolerance": 0.02
+  },
+  "preprocessing": {
+    "tokenizer": "bert-base-uncased",
+    "max_len": 128,
+    "augmentations": []
+  },
+  "mapping": {
+    "nn_modules": {
+      "AutoModel": "transformers.AutoModel",
+      "AutoTokenizer": "transformers.AutoTokenizer",
+      "Linear": "torch.nn.Linear",
+      "Softmax": "torch.nn.Softmax",
+      "CrossEntropyLoss": "torch.nn.CrossEntropyLoss",
+      "AdamW": "torch.optim.AdamW",
+      "get_linear_schedule_with_warmup": "transformers.get_linear_schedule_with_warmup"
+    }
+  }
+}

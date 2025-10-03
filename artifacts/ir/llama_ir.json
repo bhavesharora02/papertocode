@@ -1,0 +1,88 @@
+{
+  "paper": {
+    "title": "LLaMA: Open and Ef\ufb01cient Foundation Language Models",
+    "arxiv_id": "2302.13971",
+    "tasks": [
+      "Language Modeling",
+      "Common Sense Reasoning",
+      "Closed-book Question Answering",
+      "Reading Comprehension",
+      "Mathematical Reasoning",
+      "Code Generation"
+    ],
+    "domain": "NLP"
+  },
+  "dataset": {
+    "name": "LLaMA Pre-training Mix",
+    "source": "A mixture of public datasets: CommonCrawl, C4, Github, Wikipedia, Books, ArXiv, StackExchange",
+    "subset_fraction": 1.0,
+    "splits": {
+      "train": 1.0,
+      "val": 0.0,
+      "test": 0.0
+    },
+    "features": {
+      "text_a": "text",
+      "text_b": null,
+      "label": null
+    }
+  },
+  "model": {
+    "family": "LLaMA",
+    "variant": "65B",
+    "framework": "torch",
+    "layers": [
+      {
+        "type": "Transformer",
+        "params": {
+          "params": {
+            "n_layers": 80,
+            "d_model": 8192,
+            "n_heads": 64,
+            "normalization": "RMSNorm",
+            "ffn_activation": "SwiGLU",
+            "positional_embedding": "RoPE"
+          }
+        }
+      }
+    ],
+    "init": {
+      "pretrained": null
+    }
+  },
+  "training": {
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 0.00015,
+      "kwargs": {
+        "betas": [
+          0.9,
+          0.95
+        ],
+        "weight_decay": 0.1,
+        "gradient_clipping": 1.0
+      }
+    },
+    "scheduler": {
+      "name": "cosine",
+      "kwargs": {
+        "warmup_steps": 2000,
+        "final_lr_fraction": 0.1
+      }
+    },
+    "batch_size": 4000000,
+    "epochs": 1,
+    "metrics": [
+      "accuracy",
+      "exact_match",
+      "pass@1"
+    ],
+    "target_metrics": {},
+    "tolerance": 0.05
+  },
+  "preprocessing": {
+    "tokenizer": "SentencePiece BPE",
+    "max_len": 2048
+  }
+}

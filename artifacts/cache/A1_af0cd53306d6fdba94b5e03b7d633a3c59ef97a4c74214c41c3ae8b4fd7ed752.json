@@ -1,0 +1,62 @@
+{
+  "family": "Transformer",
+  "variant": "bert-base-uncased",
+  "layers": [
+    {
+      "type": "pretrained_transformer_encoder",
+      "params": {
+        "model_name": "bert-base-uncased",
+        "output_pooler": true
+      }
+    },
+    {
+      "type": "linear",
+      "params": {
+        "in_features": 768,
+        "out_features": "num_classes"
+      }
+    },
+    {
+      "type": "softmax",
+      "params": {}
+    }
+  ],
+  "training": {
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 2e-05,
+      "weight_decay": 0.01
+    },
+    "scheduler": {
+      "name": "linear_warmup",
+      "kwargs": {
+        "warmup_ratio": 0.1
+      }
+    },
+    "batch_size": 32,
+    "epochs": 3,
+    "metrics": [
+      "accuracy",
+      "f1"
+    ],
+    "target_metrics": {
+      "accuracy": 0.9
+    }
+  },
+  "preprocessing": {
+    "tokenizer": "bert-base-uncased",
+    "max_len": 128,
+    "augmentations": []
+  },
+  "dataset_hints": {
+    "name": "GLUE",
+    "features": {
+      "text": {
+        "text_a": "...",
+        "text_b": "..."
+      },
+      "label": "..."
+    }
+  }
+}

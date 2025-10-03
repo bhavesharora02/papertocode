@@ -1,0 +1,59 @@
+{
+  "dataset": {
+    "name": "ImageNet",
+    "source": "torchvision/imagenet",
+    "subset_fraction": 1.0,
+    "splits": {
+      "train": 0.8,
+      "val": 0.1,
+      "test": 0.1
+    },
+    "features": {
+      "image": "image",
+      "label": "label"
+    }
+  },
+  "init": {
+    "pretrained": "resnet18"
+  },
+  "training": {
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "name": "SGD",
+      "lr": 0.1,
+      "weight_decay": 0.0001,
+      "momentum": 0.9
+    },
+    "scheduler": {
+      "name": "StepLR",
+      "kwargs": {
+        "step_size": 30,
+        "gamma": 0.1
+      }
+    },
+    "batch_size": 256,
+    "epochs": 90,
+    "metrics": [
+      "accuracy",
+      "top5_accuracy"
+    ]
+  },
+  "preprocessing": {
+    "resize": 224,
+    "augmentations": [
+      "random_crop",
+      "horizontal_flip",
+      "normalize"
+    ]
+  },
+  "nn_modules": {
+    "Conv2d": "torch.nn.Conv2d",
+    "MaxPool2d": "torch.nn.MaxPool2d",
+    "BatchNorm2d": "torch.nn.BatchNorm2d",
+    "ReLU": "torch.nn.ReLU",
+    "Sequential": "torch.nn.Sequential",
+    "Linear": "torch.nn.Linear",
+    "AdaptiveAvgPool2d": "torch.nn.AdaptiveAvgPool2d",
+    "CrossEntropyLoss": "torch.nn.CrossEntropyLoss"
+  }
+}

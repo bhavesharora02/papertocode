@@ -1,0 +1,44 @@
+{
+    "paper": {
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers",
+      "arxiv_id": "1810.04805",
+      "tasks": ["text_classification"],
+      "domain": "NLP"
+    },
+    "dataset": {
+      "name": "SST-2",
+      "source": "glue/sst2",
+      "subset_fraction": 0.1,
+      "splits": {"train": 0.8, "val": 0.1, "test": 0.1},
+      "features": {"text": "sentence", "label": "label"}
+    },
+    "model": {
+      "family": "Transformer",
+      "variant": "BERT",
+      "framework": "torch",
+      "layers": [
+        {"type": "Embedding", "dim": 768},
+        {"type": "TransformerEncoder", "num_layers": 12, "heads": 12, "hidden": 768},
+        {"type": "ClassifierHead", "num_classes": 2}
+      ],
+      "init": {"pretrained": "bert-base-uncased"}
+    },
+    "training": {
+      "loss": "CrossEntropyLoss",
+      "optimizer": {"name": "AdamW", "lr": 2e-5, "weight_decay": 0.01},
+      "scheduler": {"name": "linear", "kwargs": {"warmup_steps": 500}},
+      "batch_size": 32,
+      "epochs": 3,
+      "metrics": ["accuracy"],
+      "target_metrics": {"accuracy": 0.92},
+      "tolerance": 0.02
+    },
+    "preprocessing": {"tokenizer": "bert-base-uncased", "max_len": 128},
+    "mapping": {
+      "nn_modules": {
+        "TransformerEncoder": "torch.nn.TransformerEncoder",
+        "CrossEntropyLoss": "torch.nn.CrossEntropyLoss"
+      }
+    }
+  }
+  

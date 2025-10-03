@@ -1,0 +1,26 @@
+papers:
+  - title: "BERT: Pre-training of Deep Bidirectional Transformers"
+    domain: NLP
+    dataset: GLUE/SST2
+    target_metrics:
+      accuracy: 0.92
+  - title: "ResNet: Deep Residual Learning for Image Recognition"
+    domain: CV
+    dataset: CIFAR-10
+    target_metrics:
+      accuracy: 0.93
+  - title: "Vision Transformer (ViT)"
+    domain: CV
+    dataset: ImageNet (subset)
+    target_metrics:
+      accuracy: 0.84
+  - title: "LLaMA: Open and Efficient Foundation Language Models"
+    domain: NLP
+    dataset: WikiText-2
+    target_metrics:
+      perplexity: 20.0
+  - title: "XGBoost: Scalable Tree Boosting"
+    domain: ClassicML
+    dataset: Tabular (UCI Adult)
+    target_metrics:
+      accuracy: 0.87

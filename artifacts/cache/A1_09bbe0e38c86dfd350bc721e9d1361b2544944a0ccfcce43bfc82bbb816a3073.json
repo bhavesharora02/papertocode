@@ -1,0 +1,94 @@
+{
+  "family": "CNN",
+  "variant": "ResNet",
+  "layers": [
+    {
+      "type": "conv",
+      "params": {
+        "kernel_size": 7,
+        "stride": 2,
+        "filters": 64
+      }
+    },
+    {
+      "type": "maxpool",
+      "params": {
+        "kernel_size": 3,
+        "stride": 2
+      }
+    },
+    {
+      "type": "residual_block",
+      "params": {
+        "repetitions": [
+          3,
+          4,
+          6,
+          3
+        ],
+        "filters": [
+          64,
+          128,
+          256,
+          512
+        ],
+        "strides": [
+          1,
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "type": "avgpool",
+      "params": {
+        "kernel_size": 7
+      }
+    },
+    {
+      "type": "linear",
+      "params": {
+        "units": 1000
+      }
+    }
+  ],
+  "training": {
+    "loss": "cross_entropy",
+    "optimizer": {
+      "name": "SGD",
+      "lr": 0.1,
+      "weight_decay": 0.0001,
+      "momentum": 0.9
+    },
+    "scheduler": {
+      "name": "step",
+      "kwargs": {
+        "step_size": 30,
+        "gamma": 0.1
+      }
+    },
+    "batch_size": 256,
+    "epochs": 90,
+    "metrics": [
+      "accuracy",
+      "top5_accuracy"
+    ]
+  },
+  "preprocessing": {
+    "augmentations": [
+      "random_crop",
+      "horizontal_flip",
+      "normalize"
+    ]
+  },
+  "dataset_hints": {
+    "datasets": [
+      "ImageNet"
+    ],
+    "features": {
+      "image": "input",
+      "label": "target"
+    }
+  }
+}
