@@ -97,7 +97,7 @@ def parse_paper(pdf_path: str, outdir="artifacts/ir"):
     with open(out_path, "w") as f:
         json.dump(ir_dict, f, indent=2)
 
-    print(f"✅ Parsed {pdf_path} → {out_path}")
+    print(f"OK: Parsed {pdf_path} -> {out_path}")
     return out_path
 
 

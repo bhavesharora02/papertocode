@@ -1,0 +1,106 @@
+{
+  "paper": {
+    "title": "EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks",
+    "arxiv_id": "1905.11946",
+    "tasks": [
+      "Image Classification",
+      "Transfer Learning"
+    ],
+    "domain": "Computer Vision"
+  },
+  "dataset": {
+    "name": "ImageNet",
+    "source": "hf://imagenet-1k",
+    "subset_fraction": 1.0,
+    "splits": {
+      "train": 0.8,
+      "val": 0.1,
+      "test": 0.1
+    },
+    "features": {
+      "text_a": "image",
+      "text_b": "",
+      "label": "label"
+    }
+  },
+  "model": {
+    "family": "EfficientNet",
+    "variant": "EfficientNet-B0",
+    "framework": "torch",
+    "layers": [
+      {
+        "type": "Conv2d",
+        "params": {
+          "comment": "Initial stem convolution"
+        }
+      },
+      {
+        "type": "MBConv",
+        "params": {
+          "comment": "Sequence of MBConv blocks as defined in Table 1. Uses mobile inverted bottleneck, squeeze-and-excitation optimization, and SiLU activation."
+        }
+      },
+      {
+        "type": "Conv2d",
+        "params": {
+          "comment": "Final 1x1 convolution head"
+        }
+      },
+      {
+        "type": "AdaptiveAvgPool2d",
+        "params": {}
+      },
+      {
+        "type": "Dropout",
+        "params": {
+          "p": 0.2
+        }
+      },
+      {
+        "type": "Linear",
+        "params": {
+          "comment": "Classifier layer for 1000 classes"
+        }
+      }
+    ],
+    "init": {
+      "pretrained": "ImageNet"
+    },
+    "num_labels": 1000
+  },
+  "training": {
+    "loss": "CrossEntropyLoss",
+    "optimizer": {
+      "name": "RMSProp",
+      "lr": 0.256,
+      "kwargs": {
+        "alpha": 0.9,
+        "momentum": 0.9,
+        "weight_decay": 1e-05
+      }
+    },
+    "scheduler": {
+      "name": "ExponentialLR",
+      "kwargs": {
+        "gamma": 0.97,
+        "step_period_in_epochs": 2.4
+      }
+    },
+    "batch_size": 32,
+    "epochs": 3,
+    "metrics": [
+      "top-1 accuracy",
+      "top-5 accuracy"
+    ],
+    "target_metrics": {
+      "EfficientNet-B7 on ImageNet": {
+        "top-1 accuracy": 0.843
+      }
+    },
+    "tolerance": 0.05
+  },
+  "preprocessing": {
+    "tokenizer": "",
+    "max_len": 224
+  }
+}

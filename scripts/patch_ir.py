@@ -9,7 +9,9 @@ def patch_ir(ir_path: str, out_path: str = None):
         ir["dataset"] = {}
 
     # Splits
-    if not ir["dataset"].get("splits") or not sum(ir["dataset"]["splits"].values()):
+    splits = ir.get("dataset", {}).get("splits", {})
+    split_sum = sum(v for v in splits.values() if isinstance(v, (int, float)) and v is not None)
+    if not splits or split_sum == 0:
         ir["dataset"]["splits"] = {"train": 0.8, "val": 0.1, "test": 0.1}
 
     # Features
@@ -26,7 +28,7 @@ def patch_ir(ir_path: str, out_path: str = None):
     name = (ir["dataset"].get("name") or "").lower()
     src = str(ir["dataset"].get("source", "")).lower()
     if not src.startswith("hf://"):
-        print(f"⚠️ Invalid dataset source '{ir['dataset'].get('source')}', patching to dummy")
+        print(f"Warning: Invalid dataset source '{ir['dataset'].get('source')}', patching to dummy")
         ir["dataset"]["source"] = "hf://dummy"
 
     # -------- Model --------
@@ -60,7 +62,7 @@ def patch_ir(ir_path: str, out_path: str = None):
     if not training.get("optimizer"):
         training["optimizer"] = {"name": "AdamW", "lr": 2e-5}
     if not training.get("batch_size") or training["batch_size"] > 1024:
-        print(f"⚠️ Resetting batch_size → 32 (was {training.get('batch_size')})")
+        print(f"Warning: Resetting batch_size -> 32 (was {training.get('batch_size')})")
         training["batch_size"] = 32
     if not training.get("epochs"):
         training["epochs"] = 3
@@ -91,7 +93,7 @@ def patch_ir(ir_path: str, out_path: str = None):
             "positional_embeddings", "ffn_activation"
         ]:
             if bad_key in params:
-                print(f"⚠️ Removing unsupported param '{bad_key}': {params[bad_key]}")
+                print(f"Warning: Removing unsupported param '{bad_key}': {params[bad_key]}")
                 params.pop(bad_key, None)
 
     # -------- Save --------
@@ -101,7 +103,7 @@ def patch_ir(ir_path: str, out_path: str = None):
     with open(out_path, "w") as f:
         json.dump(ir, f, indent=2)
 
-    print(f"✅ Patched IR saved at {out_path}")
+    print(f"OK: Patched IR saved at {out_path}")
     return out_path
 
 

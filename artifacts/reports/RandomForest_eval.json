@@ -1,0 +1,7 @@
+{
+  "status": "success",
+  "message": "Evaluation completed successfully.",
+  "accuracy": 0.53,
+  "loss": 0.0277,
+  "latency_sec": 0.12
+}

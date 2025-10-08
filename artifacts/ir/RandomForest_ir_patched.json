@@ -1,0 +1,71 @@
+{
+  "paper": {
+    "title": "Random Forests",
+    "arxiv_id": null,
+    "tasks": [
+      "classification",
+      "regression"
+    ],
+    "domain": "Machine Learning"
+  },
+  "dataset": {
+    "name": "zip-code",
+    "source": "hf://dummy",
+    "subset_fraction": 1.0,
+    "splits": {
+      "train": 0.784,
+      "val": 0.0,
+      "test": 0.216
+    },
+    "features": {
+      "text_a": "pixel_values",
+      "text_b": "",
+      "label": "digit"
+    }
+  },
+  "model": {
+    "family": "Random Forest",
+    "variant": "Forest-RI",
+    "framework": "torch",
+    "layers": [
+      {
+        "type": "RandomForestClassifier",
+        "params": {
+          "n_estimators": 200,
+          "criterion": "Gini",
+          "max_features": 25,
+          "bootstrap": true,
+          "oob_score": true
+        }
+      }
+    ],
+    "init": {
+      "pretrained": null
+    },
+    "num_labels": 2
+  },
+  "training": {
+    "loss": "Gini Impurity",
+    "optimizer": {
+      "name": null,
+      "lr": null
+    },
+    "scheduler": {
+      "name": null,
+      "kwargs": {}
+    },
+    "batch_size": 32,
+    "epochs": 1,
+    "metrics": [
+      "accuracy"
+    ],
+    "target_metrics": {
+      "test_accuracy": 0.942
+    },
+    "tolerance": 0.05
+  },
+  "preprocessing": {
+    "tokenizer": "",
+    "max_len": 128
+  }
+}

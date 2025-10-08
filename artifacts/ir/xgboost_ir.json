@@ -1,0 +1,67 @@
+{
+  "paper": {
+    "title": "XGBoost: A Scalable Tree Boosting System",
+    "arxiv_id": "1603.02754",
+    "tasks": [
+      "Classification",
+      "Ranking"
+    ],
+    "domain": "Machine Learning"
+  },
+  "dataset": {
+    "name": "Generic Tabular Data",
+    "source": null,
+    "subset_fraction": 1.0,
+    "splits": {
+      "train": 0.8,
+      "val": 0.1,
+      "test": 0.1
+    },
+    "features": {
+      "text_a": "tabular_features",
+      "text_b": null,
+      "label": "target_variable"
+    }
+  },
+  "model": {
+    "family": "Gradient Boosting",
+    "variant": "XGBoost",
+    "framework": "custom",
+    "layers": [
+      {
+        "type": "XGBoost",
+        "params": {
+          "params": {
+            "max_depth": 8
+          }
+        }
+      }
+    ],
+    "init": {
+      "pretrained": null
+    }
+  },
+  "training": {
+    "loss": "SecondOrderApproximatedLoss",
+    "optimizer": {
+      "name": "GradientBoosting",
+      "lr": 0.1
+    },
+    "scheduler": {
+      "name": null,
+      "kwargs": {}
+    },
+    "batch_size": null,
+    "epochs": 500,
+    "metrics": [
+      "AUC",
+      "NDCG"
+    ],
+    "target_metrics": {},
+    "tolerance": 0.05
+  },
+  "preprocessing": {
+    "tokenizer": null,
+    "max_len": null
+  }
+}

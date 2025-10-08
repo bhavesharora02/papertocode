@@ -13,9 +13,13 @@
   },
   "dataset": {
     "name": "BooksCorpus and English Wikipedia",
-    "source": null,
+    "source": "hf://dummy",
     "subset_fraction": 1.0,
-    "splits": null,
+    "splits": {
+      "train": 0.8,
+      "val": 0.1,
+      "test": 0.1
+    },
     "features": {
       "text_a": "sentence_A",
       "text_b": "sentence_B",
@@ -40,7 +44,8 @@
     ],
     "init": {
       "pretrained": null
-    }
+    },
+    "num_labels": 2
   },
   "training": {
     "loss": "MaskedLMLoss + NextSentencePredictionLoss",

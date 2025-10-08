@@ -1,0 +1,64 @@
+{
+  "history": [
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 91, in <module>\n    patch_num_classes_and_training(data)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 49, in patch_num_classes_and_training\n    print(f\"\\u26a0\\ufe0f Could not patch num_classes automatically: {e}\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 91, in <module>\n    patch_num_classes_and_training(data)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 57, in patch_num_classes_and_training\n    print(f\"Warning: Mapping non-Torch loss '{loss}' \\u2192 '{LOSS_MAP[normalized]}'\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u2192' in position 62: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 91, in <module>\n    patch_num_classes_and_training(data)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 57, in patch_num_classes_and_training\n    print(f\"Warning: Mapping non-Torch loss '{loss}' \\u2192 '{LOSS_MAP[normalized]}'\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u2192' in position 62: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 91, in <module>\n    patch_num_classes_and_training(data)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 57, in patch_num_classes_and_training\n    print(f\"Warning: Mapping non-Torch loss '{loss}' \\u2192 '{LOSS_MAP[normalized]}'\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u2192' in position 62: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 101, in <module>\n    verify_repo(ir, repo_dir, report_path)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\papertocode\\core\\verify\\verifier.py\", line 16, in verify_repo\n    print(\"\\U0001f50d DEBUG: Starting verify_repo...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f50d' in position 0: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 101, in <module>\n    verify_repo(ir, repo_dir, report_path)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\papertocode\\core\\verify\\verifier.py\", line 16, in verify_repo\n    print(\"\\U0001f50d DEBUG: Starting verify_repo...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f50d' in position 0: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 101, in <module>\n    verify_repo(ir, repo_dir, report_path)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\papertocode\\core\\verify\\verifier.py\", line 16, in verify_repo\n    print(\"\\U0001f50d DEBUG: Starting verify_repo...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f50d' in position 0: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 116, in <module>\n    ensure_training_defaults(data)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 50, in ensure_training_defaults\n    print(\"\\u26a0\\ufe0f Missing optimizer name, defaulting to 'Adam'\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 127, in <module>\n    verify_repo(ir, repo_dir, report_path)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\papertocode\\core\\verify\\verifier.py\", line 117, in verify_repo\n    print(\"\\u2705 Verification finished successfully.\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u2705' in position 0: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "  File \"D:\\papertocode\\scripts\\verify_repo.py\", line 127, in <module>\n    verify_repo(ir, repo_dir, report_path)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\papertocode\\core\\verify\\verifier.py\", line 117, in verify_repo\n    print(\"\\u2705 Verification finished successfully.\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u2705' in position 0: character maps to <undefined>"
+    },
+    {
+      "rule": "tree_model_fallback",
+      "error_tail": "OK: Verification finished\n\nOK: Verification completed successfully.\n? Report saved at: artifacts/reports/RandomForest_verify.json\n{\n  \"status\": \"success\",\n  \"message\": \"Verification completed successfully.\",\n  \"accuracy\": 0.95,\n  \"loss\": 0.12\n}"
+    },
+    {
+      "rule": "tree_model_fallback",
+      "error_tail": "OK: Verification finished\n\nOK: Verification completed successfully.\n? Report saved at: artifacts/reports/RandomForest_verify.json\n{\n  \"status\": \"success\",\n  \"message\": \"Verification completed successfully.\",\n  \"accuracy\": 0.95,\n  \"loss\": 0.12\n}"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "UnicodeEncodeError: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>\n\nWarning: Could not patch num_classes automatically: Dataset 'imagenet-1k' is a gated dataset on the Hub. Visit the dataset page at https://huggingface.co/datasets/imagenet-1k to ask for access.\nWarning: Unknown loss 'CrossEntropyLoss', defaulting to MSELoss\nWarning: Switching MSELoss -> CrossEntropyLoss (multi-class detected)\nWarning: Unknown optimizer 'RMSProp', defaulting to Adam\nOK: Starting verification for artifacts/repos/EfficientNet_ir_patched, report -> artifacts/reports/EfficientNet_verify.json\nDEBUG: Starting verify_repo...\nIR model family: EfficientNet, layers: 6\nDEBUG: Loading real dataset subset (2%)..."
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\papertocode\\core\\verify\\verifier.py\", line 64, in verify_repo\n    loader = load_dataset_from_ir(ir, subset_fraction=0.02)\n  File \"D:\\papertocode\\core\\verify\\dataset_loader.py\", line 67, in load_dataset_from_ir\n    print(f\"\\u26a0\\ufe0f Dataset load failed, fallback to dummy. Error: {e}\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>"
+    },
+    {
+      "rule": "remove_unicode_from_verify_repo",
+      "error_tail": "    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\papertocode\\core\\verify\\verifier.py\", line 64, in verify_repo\n    loader = load_dataset_from_ir(ir, subset_fraction=0.02)\n  File \"D:\\papertocode\\core\\verify\\dataset_loader.py\", line 67, in load_dataset_from_ir\n    print(f\"\\u26a0\\ufe0f Dataset load failed, fallback to dummy. Error: {e}\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\acer\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>"
+    }
+  ]
+}

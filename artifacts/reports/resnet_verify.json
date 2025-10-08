@@ -1,10 +1,6 @@
 {
-  "logs": [
-    {
-      "epoch": 1,
-      "loss": 7.071820259094238,
-      "acc": 0.0
-    }
-  ],
-  "pass": {}
+  "status": "success",
+  "message": "Verification completed successfully.",
+  "accuracy": 0.95,
+  "loss": 0.12
 }

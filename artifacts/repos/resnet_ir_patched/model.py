@@ -7,31 +7,39 @@ class Model(nn.Module):
         super().__init__()
         
         
-        self.conv2d1 = nn.Conv2d(**{'in_channels': 3, 'out_channels': 64, 'kernel_size': 7, 'stride': 2})
+        self.seq1 = nn.Sequential(
+            
+            nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False),
+            
+            nn.BatchNorm2d(64),
+            
+            nn.ReLU(inplace=True),
+            
+        )
         
         
         
-        self.maxpool2d2 = nn.MaxPool2d(**{'kernel_size': 3, 'stride': 2})
+        self.maxpool2d2 = nn.MaxPool2d(**{'kernel_size': 3, 'stride': 2, 'padding': 1})
         
         
         
         self.seq3 = nn.Sequential(
             
-            nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.Conv2d(64, 256, kernel_size=3, stride=1, padding=1, bias=False),
             
-            nn.BatchNorm2d(64),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(64),
+            nn.BatchNorm2d(256),
             
             nn.ReLU(inplace=True),
             
-            nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
             
-            nn.BatchNorm2d(64),
+            nn.BatchNorm2d(256),
+            
+            nn.ReLU(inplace=True),
+            
+            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(256),
             
             nn.ReLU(inplace=True),
             
@@ -40,78 +48,6 @@ class Model(nn.Module):
         
         
         self.seq4 = nn.Sequential(
-            
-            nn.Conv2d(64, 128, kernel_size=3, stride=2, padding=1, bias=False),
-            
-            nn.BatchNorm2d(128),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(128),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(128),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(128),
-            
-            nn.ReLU(inplace=True),
-            
-        )
-        
-        
-        
-        self.seq5 = nn.Sequential(
-            
-            nn.Conv2d(128, 256, kernel_size=3, stride=2, padding=1, bias=False),
-            
-            nn.BatchNorm2d(256),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(256),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(256),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(256),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(256),
-            
-            nn.ReLU(inplace=True),
-            
-            nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
-            
-            nn.BatchNorm2d(256),
-            
-            nn.ReLU(inplace=True),
-            
-        )
-        
-        
-        
-        self.seq6 = nn.Sequential(
             
             nn.Conv2d(256, 512, kernel_size=3, stride=2, padding=1, bias=False),
             
@@ -131,17 +67,91 @@ class Model(nn.Module):
             
             nn.ReLU(inplace=True),
             
+            nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(512),
+            
+            nn.ReLU(inplace=True),
+            
         )
         
         
         
-        self.seq7 = nn.Sequential(
+        self.seq5 = nn.Sequential(
             
-            nn.AdaptiveAvgPool2d((1,1)),
+            nn.Conv2d(512, 1024, kernel_size=3, stride=2, padding=1, bias=False),
+            
+            nn.BatchNorm2d(1024),
+            
+            nn.ReLU(inplace=True),
+            
+            nn.Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(1024),
+            
+            nn.ReLU(inplace=True),
+            
+            nn.Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(1024),
+            
+            nn.ReLU(inplace=True),
+            
+            nn.Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(1024),
+            
+            nn.ReLU(inplace=True),
+            
+            nn.Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(1024),
+            
+            nn.ReLU(inplace=True),
+            
+            nn.Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(1024),
+            
+            nn.ReLU(inplace=True),
+            
+        )
+        
+        
+        
+        self.seq6 = nn.Sequential(
+            
+            nn.Conv2d(1024, 2048, kernel_size=3, stride=2, padding=1, bias=False),
+            
+            nn.BatchNorm2d(2048),
+            
+            nn.ReLU(inplace=True),
+            
+            nn.Conv2d(2048, 2048, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(2048),
+            
+            nn.ReLU(inplace=True),
+            
+            nn.Conv2d(2048, 2048, kernel_size=3, stride=1, padding=1, bias=False),
+            
+            nn.BatchNorm2d(2048),
+            
+            nn.ReLU(inplace=True),
+            
+        )
+        
+        
+        
+        self.adaptiveavgpool2d7 = nn.AdaptiveAvgPool2d(**{'output_size': [1, 1]})
+        
+        
+        
+        self.seq8 = nn.Sequential(
             
             nn.Flatten(),
             
-            nn.Linear(512, 1000),
+            nn.Linear(2048, 1000),
             
         )
         
@@ -154,7 +164,7 @@ class Model(nn.Module):
         out = x
         
         
-        out = self.conv2d1(out)
+        out = self.seq1(out)
         
         
         
@@ -178,7 +188,11 @@ class Model(nn.Module):
         
         
         
-        out = self.seq7(out)
+        out = self.adaptiveavgpool2d7(out)
+        
+        
+        
+        out = self.seq8(out)
         
         
         return out

@@ -23,10 +23,10 @@ if __name__ == "__main__":
 
         # Check pass/fail
         if report.get("pass") and all(report["pass"].values()):
-            print("✅ Target metrics achieved! Exiting loop.")
+            print("OK: Target metrics achieved! Exiting loop.")
             break
         else:
-            print("❌ Target metrics not achieved, running debugger...")
+            print("Error: Target metrics not achieved, running debugger...")
 
         # Otherwise run debugger
         patch = run_debugger(ir_data, report, api_key)
@@ -40,4 +40,4 @@ if __name__ == "__main__":
         subprocess.run(["python", "-m", "scripts.generate_repo", ir_path])
         print("Using GEMINI_API_KEY:", api_key[:6] + "..." if api_key else "NOT FOUND")
 
-    print("🔁 Debug loop finished.")
+    print("? Debug loop finished.")

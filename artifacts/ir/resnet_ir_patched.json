@@ -5,88 +5,71 @@
     "tasks": [
       "Image Classification",
       "Object Detection",
-      "Image Localization"
+      "Image Localization",
+      "Object Segmentation"
     ],
-    "domain": "Computer Vision"
+    "domain": "Image Recognition"
   },
   "dataset": {
     "name": "ImageNet 2012",
     "source": "hf://imagenet-1k",
     "subset_fraction": 1.0,
     "splits": {
-      "train": 0.9,
-      "val": 0.03,
-      "test": 0.07
+      "train": 0.8,
+      "val": 0.1,
+      "test": 0.1
     },
     "features": {
       "text_a": "image",
       "text_b": "",
-      "label": "class_label"
+      "label": "label"
     }
   },
   "model": {
     "family": "ResNet",
-    "variant": "ResNet-34",
+    "variant": "ResNet-50",
     "framework": "torch",
     "layers": [
       {
-        "type": "ConvStem",
+        "type": "ConvBNReLU",
         "params": {
           "params": {
             "in_channels": 3,
             "out_channels": 64,
             "kernel_size": 7,
-            "stride": 2
+            "stride": 2,
+            "padding": 3
           }
         }
       },
       {
-        "type": "MaxPool",
+        "type": "MaxPool2d",
         "params": {
           "params": {
             "kernel_size": 3,
-            "stride": 2
+            "stride": 2,
+            "padding": 1
           }
         }
       },
       {
-        "type": "ResNetStage",
+        "type": "ResidualStack",
         "params": {
           "params": {
             "num_blocks": 3,
+            "block_type": "bottleneck",
             "in_channels": 64,
-            "out_channels": 64,
+            "out_channels": 256,
             "stride": 1
           }
         }
       },
       {
-        "type": "ResNetStage",
+        "type": "ResidualStack",
         "params": {
           "params": {
             "num_blocks": 4,
-            "in_channels": 64,
-            "out_channels": 128,
-            "stride": 2
-          }
-        }
-      },
-      {
-        "type": "ResNetStage",
-        "params": {
-          "params": {
-            "num_blocks": 6,
-            "in_channels": 128,
-            "out_channels": 256,
-            "stride": 2
-          }
-        }
-      },
-      {
-        "type": "ResNetStage",
-        "params": {
-          "params": {
-            "num_blocks": 3,
+            "block_type": "bottleneck",
             "in_channels": 256,
             "out_channels": 512,
             "stride": 2
@@ -94,18 +77,52 @@
         }
       },
       {
-        "type": "ClassificationHead",
+        "type": "ResidualStack",
         "params": {
           "params": {
-            "in_features": 512,
-            "num_classes": 1000,
-            "pool_type": "average"
+            "num_blocks": 6,
+            "block_type": "bottleneck",
+            "in_channels": 512,
+            "out_channels": 1024,
+            "stride": 2
+          }
+        }
+      },
+      {
+        "type": "ResidualStack",
+        "params": {
+          "params": {
+            "num_blocks": 3,
+            "block_type": "bottleneck",
+            "in_channels": 1024,
+            "out_channels": 2048,
+            "stride": 2
+          }
+        }
+      },
+      {
+        "type": "AdaptiveAvgPool2d",
+        "params": {
+          "params": {
+            "output_size": [
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "type": "Linear",
+        "params": {
+          "params": {
+            "in_features": 2048,
+            "out_features": 1000
           }
         }
       }
     ],
     "init": {
-      "pretrained": "from_scratch"
+      "pretrained": "kaiming_he_initialization"
     },
     "num_labels": 1000
   },
@@ -113,11 +130,7 @@
     "loss": "CrossEntropyLoss",
     "optimizer": {
       "name": "SGD",
-      "lr": 0.1,
-      "kwargs": {
-        "momentum": 0.9,
-        "weight_decay": 0.0001
-      }
+      "lr": 0.1
     },
     "scheduler": {
       "name": "ReduceLROnPlateau",
@@ -128,16 +141,19 @@
     "batch_size": 256,
     "epochs": 120,
     "metrics": [
-      "top_1_accuracy",
-      "top_5_accuracy"
+      "top1_accuracy",
+      "top5_accuracy"
     ],
     "target_metrics": {
-      "ImageNet top-5 error": 7.46
+      "validation": {
+        "top1_accuracy": 0.7715,
+        "top5_accuracy": 0.9329
+      }
     },
     "tolerance": 0.05
   },
   "preprocessing": {
-    "tokenizer": "ImageNetPreprocessor",
-    "max_len": 224
+    "tokenizer": "",
+    "max_len": 128
   }
 }
